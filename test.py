@@ -4,7 +4,7 @@ from typing import Dict, List
 
 # Page config
 st.set_page_config(
-    page_title="شف‌ بات | Chef Bot",
+    page_title="شف‌بات | ChefBot",
     page_icon="🧑‍🍳",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -21,117 +21,26 @@ def init_groq_client():
         return None
 
 def load_menu_data():
-    """Load menu data from JSON file or return sample data"""
-    sample_data = {
-        "cafe_menu": [
-            {
-                "id": 1,
-                "name_fa": "اسپرسو",
-                "name_en": "Espresso",
-                "category_fa": "قهوه",
-                "category_en": "Coffee",
-                "ingredients_fa": ["دانه قهوه آسیاب شده", "آب"],
-                "ingredients_en": ["Ground coffee beans", "Water"],
-                "health_flags": ["caffeine"]
-            },
-            {
-                "id": 2,
-                "name_fa": "کاپوچینو",
-                "name_en": "Cappuccino",
-                "category_fa": "قهوه",
-                "category_en": "Coffee",
-                "ingredients_fa": ["اسپرسو", "شیر بخار داده شده", "فوم شیر", "دارچین"],
-                "ingredients_en": ["Espresso", "Steamed milk", "Milk foam", "Cinnamon"],
-                "health_flags": ["lactose", "caffeine"]
-            },
-            {
-                "id": 3,
-                "name_fa": "کیک شکلاتی",
-                "name_en": "Chocolate Cake",
-                "category_fa": "کیک",
-                "category_en": "Cake",
-                "ingredients_fa": ["آرد", "شکلات", "تخم مرغ", "شکر", "کره", "شیر"],
-                "ingredients_en": ["Flour", "Chocolate", "Eggs", "Sugar", "Butter", "Milk"],
-                "health_flags": ["gluten", "high_sugar", "eggs", "lactose"]
-            },
-            {
-                "id": 4,
-                "name_fa": "چیز کیک",
-                "name_en": "Cheesecake",
-                "category_fa": "کیک",
-                "category_en": "Cake",
-                "ingredients_fa": ["پنیر خامه‌ای", "بیسکویت", "کره", "شکر", "تخم مرغ"],
-                "ingredients_en": ["Cream cheese", "Cookies", "Butter", "Sugar", "Eggs"],
-                "health_flags": ["lactose", "gluten", "eggs", "high_sugar"]
-            },
-            {
-                "id": 5,
-                "name_fa": "پاستا کربونارا",
-                "name_en": "Pasta Carbonara",
-                "category_fa": "پاستا",
-                "category_en": "Pasta",
-                "ingredients_fa": ["اسپاگتی", "بیکن", "تخم مرغ", "پنیر پارمزان"],
-                "ingredients_en": ["Spaghetti", "Bacon", "Eggs", "Parmesan cheese"],
-                "health_flags": ["gluten", "eggs", "lactose", "pork"]
-            },
-            {
-                "id": 6,
-                "name_fa": "پیتزا مارگاریتا",
-                "name_en": "Pizza Margherita",
-                "category_fa": "پیتزا",
-                "category_en": "Pizza",
-                "ingredients_fa": ["خمیر پیتزا", "سس گوجه", "پنیر موزارلا", "ریحان"],
-                "ingredients_en": ["Pizza dough", "Tomato sauce", "Mozzarella cheese", "Basil"],
-                "health_flags": ["gluten", "lactose"]
-            },
-            {
-                "id": 7,
-                "name_fa": "سالاد سزار",
-                "name_en": "Caesar Salad",
-                "category_fa": "سالاد",
-                "category_en": "Salad",
-                "ingredients_fa": ["کاهو رومی", "پنیر پارمزان", "کروتون", "سس سزار"],
-                "ingredients_en": ["Romaine lettuce", "Parmesan cheese", "Croutons", "Caesar dressing"],
-                "health_flags": ["gluten", "lactose", "eggs"]
-            },
-            {
-                "id": 8,
-                "name_fa": "چای سبز",
-                "name_en": "Green Tea",
-                "category_fa": "دمنوش",
-                "category_en": "Herbal Tea",
-                "ingredients_fa": ["برگ چای سبز", "آب جوش"],
-                "ingredients_en": ["Green tea leaves", "Boiling water"],
-                "health_flags": ["mild_caffeine"]
-            },
-            {
-                "id": 9,
-                "name_fa": "چای بابونه",
-                "name_en": "Chamomile Tea",
-                "category_fa": "دمنوش",
-                "category_en": "Herbal Tea",
-                "ingredients_fa": ["گل بابونه خشک", "آب جوش"],
-                "ingredients_en": ["Dried chamomile flowers", "Boiling water"],
-                "health_flags": []
-            },
-            {
-                "id": 10,
-                "name_fa": "برگر کلاسیک",
-                "name_en": "Classic Burger",
-                "category_fa": "غذای اصلی",
-                "category_en": "Main Course",
-                "ingredients_fa": ["گوشت گاو", "نان برگر", "کاهو", "گوجه", "پنیر"],
-                "ingredients_en": ["Beef patty", "Burger bun", "Lettuce", "Tomato", "Cheese"],
-                "health_flags": ["gluten", "lactose", "beef", "high_calorie"]
-            }
-        ]
-    }
-    
+    """Load menu data from JSON file or return error message"""
     try:
         with open('menu_data.json', 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except:
-        return sample_data
+            data = json.load(f)
+            # Convert menu structure if needed
+            if 'cafe_menu' in data:
+                return data
+            else:
+                st.error("فرمت فایل منو اشتباه است | Invalid menu file format")
+                return {"cafe_menu": []}
+    except FileNotFoundError:
+        st.error("⚠️ فایل menu_data.json پیدا نشد | menu_data.json file not found")
+        st.info("لطفاً فایل menu_data.json را در کنار app.py قرار دهید | Please place menu_data.json next to app.py")
+        return {"cafe_menu": []}
+    except json.JSONDecodeError:
+        st.error("❌ فایل JSON معتبر نیست | Invalid JSON file")
+        return {"cafe_menu": []}
+    except Exception as e:
+        st.error(f"خطا در بارگیری منو | Error loading menu: {str(e)}")
+        return {"cafe_menu": []}
 
 def get_menu_item_by_id(item_id: int, menu_data: dict, language: str):
     """Get menu item by ID in specified language"""
@@ -213,7 +122,7 @@ def generate_system_prompt(language: str, mode: str, menu_data: dict):
     
     else:  # English
         if mode == 'free_chat':
-            return f"""You are an expert chef and cafe consultant named "". Chat naturally, friendly and professionally with users.
+            return f"""You are an expert chef and cafe consultant named "ChefBot". Chat naturally, friendly and professionally with users.
 
 Cafe Menu:
 {menu_text}
@@ -317,8 +226,8 @@ def show_language_selection():
     # Centered title
     st.markdown("""
     <div style='text-align: center; padding: 50px 0;'>
-        <h1>🧑‍🍳 </h1>
-        <h3>Your Smart Assistant for Cafe & Restaurant | دستیار هوشمند شما در کافه و رستوران</h3>
+        <h1>🧑‍🍳 ChefBot</h1>
+        <h3>Your Smart Food Assistant | دستیار هوشمند شما برای خوردن</h3>
         <p style='font-size: 18px; color: #666;'>Choose your language to start | برای شروع زبان خود را انتخاب کنید</p>
     </div>
     """, unsafe_allow_html=True)
@@ -357,7 +266,7 @@ def show_mode_selection():
     else:
         st.markdown("""
         <div style='text-align: center; padding: 30px 0;'>
-            <h1>🧑‍🍳 Hello! I'm </h1>
+            <h1>🧑‍🍳 Hello! I'm ChefBot</h1>
             <h3 style='color: #4ECDC4;'>How can I help you today?</h3>
         </div>
         """, unsafe_allow_html=True)
@@ -464,7 +373,7 @@ def show_menu_selection():
         st.markdown("### چی دوست داری بخوری؟")
         st.markdown("*از هر کدوم که انتخاب کنی، من چک می‌کنم که مناسب باشه*")
     else:
-        st.title("📜  Cafe Menu")
+        st.title("📜 ChefBot Cafe Menu")
         st.markdown("### What would you like to have?")
         st.markdown("*I'll check if your selection is suitable for you*")
     
@@ -544,7 +453,7 @@ def show_chat_interface():
             'validation': '✅ بررسی انتخاب شما'
         },
         'en': {
-            'free_chat': '💬 Free Chat with ',
+            'free_chat': '💬 Free Chat with ChefBot',
             'guided': '📋 Guided Assessment',
             'validation': '✅ Selection Validation'
         }
@@ -620,7 +529,7 @@ def show_chat_interface():
         else:
             initial_prompt = """Hello and welcome! 👋
 
-I'm  and I want to find the best recommendation for you.
+I'm ChefBot and I want to find the best recommendation for you.
 
 First of all, do you have any allergies or sensitivities? Such as:
 - Lactose intolerance
@@ -700,8 +609,8 @@ def show_footer():
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px;'>
-        <p>🧑‍🍳 <strong></strong> - Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</p>
-        <p>Made with Aysan</p>
+        <p>🧑‍🍳 <strong>ChefBot</strong> - Your Smart Food Assistant | دستیار هوشمند شما برای خوردن</p>
+        <p>Made with i-sun</p>
     </div>
     """, unsafe_allow_html=True)
 
