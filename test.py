@@ -4,7 +4,7 @@ from typing import Dict, List
 
 # Page config
 st.set_page_config(
-    page_title="شف‌بات | ChefBot",
+    page_title="شف‌ بات | Chef Bot",
     page_icon="🧑‍🍳",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -213,7 +213,7 @@ def generate_system_prompt(language: str, mode: str, menu_data: dict):
     
     else:  # English
         if mode == 'free_chat':
-            return f"""You are an expert chef and cafe consultant named "ChefBot". Chat naturally, friendly and professionally with users.
+            return f"""You are an expert chef and cafe consultant named "". Chat naturally, friendly and professionally with users.
 
 Cafe Menu:
 {menu_text}
@@ -317,7 +317,7 @@ def show_language_selection():
     # Centered title
     st.markdown("""
     <div style='text-align: center; padding: 50px 0;'>
-        <h1>🧑‍🍳 ChefBot</h1>
+        <h1>🧑‍🍳 </h1>
         <h3>Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</h3>
         <p style='font-size: 18px; color: #666;'>Choose your language to start | برای شروع زبان خود را انتخاب کنید</p>
     </div>
@@ -357,7 +357,7 @@ def show_mode_selection():
     else:
         st.markdown("""
         <div style='text-align: center; padding: 30px 0;'>
-            <h1>🧑‍🍳 Hello! I'm ChefBot</h1>
+            <h1>🧑‍🍳 Hello! I'm </h1>
             <h3 style='color: #4ECDC4;'>How can I help you today?</h3>
         </div>
         """, unsafe_allow_html=True)
@@ -464,7 +464,7 @@ def show_menu_selection():
         st.markdown("### چی دوست داری بخوری؟")
         st.markdown("*از هر کدوم که انتخاب کنی، من چک می‌کنم که مناسب باشه*")
     else:
-        st.title("📜 ChefBot Cafe Menu")
+        st.title("📜  Cafe Menu")
         st.markdown("### What would you like to have?")
         st.markdown("*I'll check if your selection is suitable for you*")
     
@@ -544,7 +544,7 @@ def show_chat_interface():
             'validation': '✅ بررسی انتخاب شما'
         },
         'en': {
-            'free_chat': '💬 Free Chat with ChefBot',
+            'free_chat': '💬 Free Chat with ',
             'guided': '📋 Guided Assessment',
             'validation': '✅ Selection Validation'
         }
@@ -620,7 +620,7 @@ def show_chat_interface():
         else:
             initial_prompt = """Hello and welcome! 👋
 
-I'm ChefBot and I want to find the best recommendation for you.
+I'm  and I want to find the best recommendation for you.
 
 First of all, do you have any allergies or sensitivities? Such as:
 - Lactose intolerance
@@ -700,7 +700,7 @@ def show_footer():
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px;'>
-        <p>🧑‍🍳 <strong>ChefBot</strong> - Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</p>
+        <p>🧑‍🍳 <strong></strong> - Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</p>
         <p>Made with ❤️ using Streamlit & Groq AI</p>
     </div>
     """, unsafe_allow_html=True)
