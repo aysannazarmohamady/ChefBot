@@ -342,7 +342,7 @@ def show_mode_selection():
                 st.rerun()
         else:
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>✅</h2>
                 <h4>I know what I want</h4>
                 <p>Choose from menu, I'll just check if it's suitable for you and warn if there are issues</p>
@@ -610,7 +610,7 @@ def show_footer():
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px;'>
         <p>🧑‍🍳 <strong>ChefBot</strong> - Your Smart Assistant for Cafe & Restaurant | دستیار هوشمند شما در کافه و رستوران</p>
-        <p>Made with ❤️ using Streamlit & Groq AI</p>
+        <p>Made with ❤️ by I-sun :)</p>
     </div>
     """, unsafe_allow_html=True)
 
