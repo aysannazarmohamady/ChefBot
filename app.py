@@ -16,7 +16,26 @@ st.set_page_config(
 # Initialize Groq client
 @st.cache_resource
 def init_groq_client():
-    api_key = st.secrets.get("GROQ_API_KEY", "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")
+    # Try to get API key from Streamlit secrets first, then environment variables
+    api_key = None
+    
+    # For Streamlit Cloud deployment
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except:
+        pass
+    
+    # For local development with .env file
+    if not api_key:
+        import os
+        from dotenv import load_dotenv
+        load_dotenv()
+        api_key = os.getenv("GROQ_API_KEY")
+    
+    if not api_key:
+        st.error("❌ GROQ_API_KEY not found! Please set it in secrets.toml or .env file")
+        st.stop()
+        
     return Groq(api_key=api_key)
 
 # Load menu data
@@ -186,6 +205,17 @@ def main():
 
 def show_language_selection():
     """Language selection page"""
+    # Custom CSS for bigger buttons
+    st.markdown("""
+    <style>
+    .stButton > button {
+        height: 80px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
     st.title("🧑‍🍳 ChefBot")
     st.markdown("### Choose Your Language | زبان خود را انتخاب کنید")
@@ -202,13 +232,13 @@ def show_language_selection():
         col_a, col_b = st.columns(2)
         
         with col_a:
-            if st.button("🇮🇷 فارسی", use_container_width=True, height=80):
+            if st.button("🇮🇷 فارسی", use_container_width=True):
                 st.session_state.language = 'fa'
                 st.session_state.step = 'mode_selection'
                 st.rerun()
         
         with col_b:
-            if st.button("🇺🇸 English", use_container_width=True, height=80):
+            if st.button("🇺🇸 English", use_container_width=True):
                 st.session_state.language = 'en'
                 st.session_state.step = 'mode_selection'
                 st.rerun()
