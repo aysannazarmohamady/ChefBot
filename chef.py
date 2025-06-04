@@ -278,7 +278,7 @@ def show_mode_selection():
     with col1:
         if lang == 'fa':
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>🤔</h2>
                 <h4>نمی‌دونم چی بخورم!</h4>
                 <p>بیا با هم حرف بزنیم و ببینیم چی برات مناسبه. مثل یه دوست صمیمی راهنماییت می‌کنم!</p>
@@ -290,7 +290,7 @@ def show_mode_selection():
                 st.rerun()
         else:
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>🤔</h2>
                 <h4>I don't know what to eat!</h4>
                 <p>Let's chat and see what suits you best. I'll guide you like a friendly expert!</p>
@@ -304,7 +304,7 @@ def show_mode_selection():
     with col2:
         if lang == 'fa':
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>📝</h2>
                 <h4>پیشنهاد شخصی‌سازی‌شده می‌خوام</h4>
                 <p>چندتا سوال ازت می‌پرسم و بهترین گزینه رو براساس سلیقه و شرایطت پیدا می‌کنیم</p>
@@ -316,7 +316,7 @@ def show_mode_selection():
                 st.rerun()
         else:
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>📝</h2>
                 <h4>I want personalized suggestions</h4>
                 <p>I'll ask you a few questions to find the perfect choice based on your taste and needs</p>
@@ -330,7 +330,7 @@ def show_mode_selection():
     with col3:
         if lang == 'fa':
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>✅</h2>
                 <h4>می‌دونم چی می‌خوام</h4>
                 <p>از منو انتخاب کن، من فقط چک می‌کنم مناسب باشه و اگه مشکلی بود بهت می‌گم</p>
@@ -342,7 +342,7 @@ def show_mode_selection():
                 st.rerun()
         else:
             st.markdown("""
-            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #f8f9fa; margin: 10px;'>
+            <div style='text-align: center; padding: 20px; border-radius: 15px; background: #2c3e50; margin: 10px;'>
                 <h2>✅</h2>
                 <h4>I know what I want</h4>
                 <p>Choose from menu, I'll just check if it's suitable for you and warn if there are issues</p>
