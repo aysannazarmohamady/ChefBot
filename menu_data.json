@@ -1,0 +1,204 @@
+{
+  "cafe_menu": [
+    {
+      "id": 1,
+      "name_fa": "اسپرسو",
+      "name_en": "Espresso",
+      "category_fa": "قهوه",
+      "category_en": "Coffee",
+      "ingredients_fa": ["دانه قهوه آسیاب شده", "آب"],
+      "ingredients_en": ["Ground coffee beans", "Water"],
+      "health_flags": []
+    },
+    {
+      "id": 2,
+      "name_fa": "کاپوچینو",
+      "name_en": "Cappuccino",
+      "category_fa": "قهوه",
+      "category_en": "Coffee",
+      "ingredients_fa": ["اسپرسو", "شیر بخار داده شده", "فوم شیر", "دارچین"],
+      "ingredients_en": ["Espresso", "Steamed milk", "Milk foam", "Cinnamon"],
+      "health_flags": ["lactose", "caffeine"]
+    },
+    {
+      "id": 3,
+      "name_fa": "لاته",
+      "name_en": "Latte",
+      "category_fa": "قهوه",
+      "category_en": "Coffee",
+      "ingredients_fa": ["اسپرسو", "شیر بخار داده شده", "فوم شیر"],
+      "ingredients_en": ["Espresso", "Steamed milk", "Milk foam"],
+      "health_flags": ["lactose", "caffeine"]
+    },
+    {
+      "id": 4,
+      "name_fa": "آمریکانو",
+      "name_en": "Americano",
+      "category_fa": "قهوه",
+      "category_en": "Coffee",
+      "ingredients_fa": ["اسپرسو", "آب داغ"],
+      "ingredients_en": ["Espresso", "Hot water"],
+      "health_flags": ["caffeine"]
+    },
+    {
+      "id": 5,
+      "name_fa": "موکا",
+      "name_en": "Mocha",
+      "category_fa": "قهوه",
+      "category_en": "Coffee",
+      "ingredients_fa": ["اسپرسو", "شیر", "شکلات", "خامه", "پودر کاکائو"],
+      "ingredients_en": ["Espresso", "Milk", "Chocolate", "Whipped cream", "Cocoa powder"],
+      "health_flags": ["lactose", "caffeine", "high_sugar"]
+    },
+    {
+      "id": 6,
+      "name_fa": "کیک شکلاتی",
+      "name_en": "Chocolate Cake",
+      "category_fa": "کیک",
+      "category_en": "Cake",
+      "ingredients_fa": ["آرد", "شکلات", "تخم مرغ", "شکر", "کره", "شیر", "بکینگ پودر"],
+      "ingredients_en": ["Flour", "Chocolate", "Eggs", "Sugar", "Butter", "Milk", "Baking powder"],
+      "health_flags": ["gluten", "eggs", "lactose", "high_sugar", "high_calorie"]
+    },
+    {
+      "id": 7,
+      "name_fa": "کیک هویج",
+      "name_en": "Carrot Cake",
+      "category_fa": "کیک",
+      "category_en": "Cake",
+      "ingredients_fa": ["آرد", "هویج رنده شده", "تخم مرغ", "شکر", "روغن", "دارچین", "گردو"],
+      "ingredients_en": ["Flour", "Grated carrot", "Eggs", "Sugar", "Oil", "Cinnamon", "Walnuts"],
+      "health_flags": ["gluten", "eggs", "nuts", "high_sugar"]
+    },
+    {
+      "id": 8,
+      "name_fa": "چیز کیک",
+      "name_en": "Cheesecake",
+      "category_fa": "کیک",
+      "category_en": "Cake",
+      "ingredients_fa": ["پنیر خامه ای", "بیسکویت", "کره", "شکر", "تخم مرغ", "وانیل"],
+      "ingredients_en": ["Cream cheese", "Cookies", "Butter", "Sugar", "Eggs", "Vanilla"],
+      "health_flags": ["lactose", "gluten", "eggs", "high_sugar", "high_calorie"]
+    },
+    {
+      "id": 9,
+      "name_fa": "پاستا کربونارا",
+      "name_en": "Pasta Carbonara",
+      "category_fa": "پاستا",
+      "category_en": "Pasta",
+      "ingredients_fa": ["اسپاگتی", "بیکن", "تخم مرغ", "پنیر پارمزان", "فلفل سیاه", "سیر"],
+      "ingredients_en": ["Spaghetti", "Bacon", "Eggs", "Parmesan cheese", "Black pepper", "Garlic"],
+      "health_flags": ["gluten", "eggs", "lactose", "pork"]
+    },
+    {
+      "id": 10,
+      "name_fa": "پاستا بولونز",
+      "name_en": "Pasta Bolognese",
+      "category_fa": "پاستا",
+      "category_en": "Pasta",
+      "ingredients_fa": ["اسپاگتی", "گوشت چرخ کرده", "گوجه فرنگی", "پیاز", "هویج", "کرفس", "شراب قرمز"],
+      "ingredients_en": ["Spaghetti", "Ground beef", "Tomatoes", "Onion", "Carrot", "Celery", "Red wine"],
+      "health_flags": ["gluten", "beef"]
+    },
+    {
+      "id": 11,
+      "name_fa": "پیتزا مارگاریتا",
+      "name_en": "Pizza Margherita",
+      "category_fa": "پیتزا",
+      "category_en": "Pizza",
+      "ingredients_fa": ["خمیر پیتزا", "سس گوجه فرنگی", "پنیر موزارلا", "ریحان", "روغن زیتون"],
+      "ingredients_en": ["Pizza dough", "Tomato sauce", "Mozzarella cheese", "Basil", "Olive oil"],
+      "health_flags": ["gluten", "lactose"]
+    },
+    {
+      "id": 12,
+      "name_fa": "پیتزا پپرونی",
+      "name_en": "Pepperoni Pizza",
+      "category_fa": "پیتزا",
+      "category_en": "Pizza",
+      "ingredients_fa": ["خمیر پیتزا", "سس گوجه فرنگی", "پنیر موزارلا", "پپرونی"],
+      "ingredients_en": ["Pizza dough", "Tomato sauce", "Mozzarella cheese", "Pepperoni"],
+      "health_flags": ["gluten", "lactose", "pork"]
+    },
+    {
+      "id": 13,
+      "name_fa": "چای سبز",
+      "name_en": "Green Tea",
+      "category_fa": "دمنوش",
+      "category_en": "Herbal Tea",
+      "ingredients_fa": ["برگ چای سبز", "آب جوش"],
+      "ingredients_en": ["Green tea leaves", "Boiling water"],
+      "health_flags": ["mild_caffeine"]
+    },
+    {
+      "id": 14,
+      "name_fa": "چای بابونه",
+      "name_en": "Chamomile Tea",
+      "category_fa": "دمنوش",
+      "category_en": "Herbal Tea",
+      "ingredients_fa": ["گل بابونه خشک", "آب جوش"],
+      "ingredients_en": ["Dried chamomile flowers", "Boiling water"],
+      "health_flags": []
+    },
+    {
+      "id": 15,
+      "name_fa": "ساندویچ کلاب",
+      "name_en": "Club Sandwich",
+      "category_fa": "ساندویچ",
+      "category_en": "Sandwich",
+      "ingredients_fa": ["نان تست", "مرغ", "بیکن", "کاهو", "گوجه فرنگی", "مایونز"],
+      "ingredients_en": ["Toast bread", "Chicken", "Bacon", "Lettuce", "Tomato", "Mayonnaise"],
+      "health_flags": ["gluten", "eggs", "pork"]
+    },
+    {
+      "id": 16,
+      "name_fa": "ساندویچ تن ماهی",
+      "name_en": "Tuna Sandwich",
+      "category_fa": "ساندویچ",
+      "category_en": "Sandwich",
+      "ingredients_fa": ["نان", "تن ماهی", "مایونز", "کاهو", "گوجه فرنگی", "خیار شور"],
+      "ingredients_en": ["Bread", "Tuna", "Mayonnaise", "Lettuce", "Tomato", "Pickles"],
+      "health_flags": ["gluten", "eggs", "fish"]
+    },
+    {
+      "id": 17,
+      "name_fa": "سالاد سزار",
+      "name_en": "Caesar Salad",
+      "category_fa": "سالاد",
+      "category_en": "Salad",
+      "ingredients_fa": ["کاهو رومی", "پنیر پارمزان", "کروتون", "سس سزار", "مرغ گریل"],
+      "ingredients_en": ["Romaine lettuce", "Parmesan cheese", "Croutons", "Caesar dressing", "Grilled chicken"],
+      "health_flags": ["gluten", "lactose", "eggs"]
+    },
+    {
+      "id": 18,
+      "name_fa": "سالاد یونانی",
+      "name_en": "Greek Salad",
+      "category_fa": "سالاد",
+      "category_en": "Salad",
+      "ingredients_fa": ["خیار", "گوجه فرنگی", "فلفل دلمه ای", "پیاز", "پنیر فتا", "زیتون", "روغن زیتون"],
+      "ingredients_en": ["Cucumber", "Tomato", "Bell peppers", "Onion", "Feta cheese", "Olives", "Olive oil"],
+      "health_flags": ["lactose"]
+    },
+    {
+      "id": 19,
+      "name_fa": "برگر کلاسیک",
+      "name_en": "Classic Burger",
+      "category_fa": "غذای اصلی",
+      "category_en": "Main Course",
+      "ingredients_fa": ["گوشت گاو", "نان برگر", "کاهو", "گوجه فرنگی", "پیاز", "پنیر", "خیار شور"],
+      "ingredients_en": ["Beef patty", "Burger bun", "Lettuce", "Tomato", "Onion", "Cheese", "Pickles"],
+      "health_flags": ["gluten", "lactose", "beef", "high_calorie"]
+    },
+    {
+      "id": 20,
+      "name_fa": "اسموتی توت فرنگی",
+      "name_en": "Strawberry Smoothie",
+      "category_fa": "نوشیدنی",
+      "category_en": "Beverage",
+      "ingredients_fa": ["توت فرنگی", "موز", "شیر", "عسل", "یخ"],
+      "ingredients_en": ["Strawberries", "Banana", "Milk", "Honey", "Ice"],
+      "health_flags": ["lactose"]
+    }
+  ]
+}
