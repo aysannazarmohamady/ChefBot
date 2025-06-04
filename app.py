@@ -2,7 +2,6 @@
 import streamlit as st
 import json
 import os
-from groq import Groq
 from typing import Dict, List
 
 # Page config
@@ -16,27 +15,17 @@ st.set_page_config(
 # Initialize Groq client
 @st.cache_resource
 def init_groq_client():
-    # Try to get API key from Streamlit secrets first, then environment variables
-    api_key = None
-    
-    # For Streamlit Cloud deployment
     try:
-        api_key = st.secrets["GROQ_API_KEY"]
-    except:
-        pass
-    
-    # For local development with .env file
-    if not api_key:
-        import os
-        from dotenv import load_dotenv
-        load_dotenv()
-        api_key = os.getenv("GROQ_API_KEY")
-    
-    if not api_key:
-        st.error("❌ GROQ_API_KEY not found! Please set it in secrets.toml or .env file")
+        from groq import Groq
+        # API key for ChefBot - temporarily in code for testing
+        api_key = "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"
+        return Groq(api_key=api_key)
+    except ImportError:
+        st.error("Groq library not installed. Please install with: pip install groq")
         st.stop()
-        
-    return Groq(api_key=api_key)
+    except Exception as e:
+        st.error(f"Error initializing Groq: {str(e)}")
+        st.stop()
 
 # Load menu data
 @st.cache_data
@@ -46,7 +35,31 @@ def load_menu_data():
             return json.load(f)
     except FileNotFoundError:
         st.error("فایل منو یافت نشد | Menu file not found")
-        return {"cafe_menu": []}
+        # Return sample data for testing
+        return {
+            "cafe_menu": [
+                {
+                    "id": 1,
+                    "name_fa": "اسپرسو",
+                    "name_en": "Espresso",
+                    "category_fa": "قهوه",
+                    "category_en": "Coffee",
+                    "ingredients_fa": ["دانه قهوه آسیاب شده", "آب"],
+                    "ingredients_en": ["Ground coffee beans", "Water"],
+                    "health_flags": ["caffeine"]
+                },
+                {
+                    "id": 2,
+                    "name_fa": "کیک شکلاتی",
+                    "name_en": "Chocolate Cake",
+                    "category_fa": "کیک",
+                    "category_en": "Cake",
+                    "ingredients_fa": ["آرد", "شکلات", "تخم مرغ", "شکر"],
+                    "ingredients_en": ["Flour", "Chocolate", "Eggs", "Sugar"],
+                    "health_flags": ["gluten", "high_sugar", "eggs"]
+                }
+            ]
+        }
 
 def get_menu_item_by_id(item_id: int, menu_data: dict, language: str):
     """Get menu item by ID in specified language"""
@@ -78,15 +91,7 @@ def generate_system_prompt(language: str, mode: str, menu_data: dict):
 1. با کاربر گفتگوی طبیعی داشته باشید
 2. در صورت تشخیص مشکل سلامتی، سوال مناسب بپرسید
 3. پیشنهادات شخصی‌سازی شده ارائه دهید
-4. فقط از آیتم‌های موجود در منو پیشنهاد دهید
-
-health_flags meanings:
-- lactose: حاوی لاکتوز
-- gluten: حاوی گلوتن  
-- caffeine: حاوی کافئین زیاد
-- high_sugar: شکر زیاد
-- nuts: حاوی آجیل
-- eggs: حاوی تخم‌مرغ"""
+4. فقط از آیتم‌های موجود در منو پیشنهاد دهید"""
 
         elif mode == 'guided':
             return f"""شما یک مشاور تخصصی کافه هستید که سوالات مرحله‌ای می‌پرسید.
@@ -124,15 +129,7 @@ Your tasks:
 1. Have natural conversations with users
 2. Ask appropriate health questions if you detect potential issues
 3. Provide personalized recommendations
-4. Only suggest items from the available menu
-
-health_flags meanings:
-- lactose: Contains lactose
-- gluten: Contains gluten
-- caffeine: High caffeine content
-- high_sugar: High sugar content
-- nuts: Contains nuts
-- eggs: Contains eggs"""
+4. Only suggest items from the available menu"""
 
         elif mode == 'guided':
             return f"""You are a professional cafe consultant who asks step-by-step questions.
@@ -178,31 +175,6 @@ def chat_with_groq(messages: List[Dict], system_prompt: str):
     except Exception as e:
         return f"خطا در ارتباط | Connection error: {str(e)}"
 
-def main():
-    # Initialize session state
-    if 'step' not in st.session_state:
-        st.session_state.step = 'language_selection'
-    if 'language' not in st.session_state:
-        st.session_state.language = None
-    if 'mode' not in st.session_state:
-        st.session_state.mode = None
-    if 'messages' not in st.session_state:
-        st.session_state.messages = []
-    if 'selected_item' not in st.session_state:
-        st.session_state.selected_item = None
-    if 'menu_data' not in st.session_state:
-        st.session_state.menu_data = load_menu_data()
-
-    # Show appropriate step
-    if st.session_state.step == 'language_selection':
-        show_language_selection()
-    elif st.session_state.step == 'mode_selection':
-        show_mode_selection()
-    elif st.session_state.step == 'menu_display':
-        show_menu_selection()
-    elif st.session_state.step == 'chat_interface':
-        show_chat_interface()
-
 def show_language_selection():
     """Language selection page"""
     # Custom CSS for bigger buttons
@@ -232,13 +204,13 @@ def show_language_selection():
         col_a, col_b = st.columns(2)
         
         with col_a:
-            if st.button("🇮🇷 فارسی", use_container_width=True):
+            if st.button("🇮🇷 فارسی", use_container_width=True, key="btn_fa"):
                 st.session_state.language = 'fa'
                 st.session_state.step = 'mode_selection'
                 st.rerun()
         
         with col_b:
-            if st.button("🇺🇸 English", use_container_width=True):
+            if st.button("🇺🇸 English", use_container_width=True, key="btn_en"):
                 st.session_state.language = 'en'
                 st.session_state.step = 'mode_selection'
                 st.rerun()
@@ -267,14 +239,14 @@ def show_mode_selection():
         if lang == 'fa':
             st.markdown("#### 🤔 نمی‌دونم چی بخورم!")
             st.markdown("بیا با هم حرف بزنیم و ببینیم چی برات مناسبه")
-            if st.button("💬 گفتگو کنیم", use_container_width=True):
+            if st.button("💬 گفتگو کنیم", use_container_width=True, key="mode_free"):
                 st.session_state.mode = 'free_chat'
                 st.session_state.step = 'chat_interface'
                 st.rerun()
         else:
             st.markdown("#### 🤔 I don't know what to eat!")
             st.markdown("Let's chat and see what suits you best")
-            if st.button("💬 Let's Chat", use_container_width=True):
+            if st.button("💬 Let's Chat", use_container_width=True, key="mode_free"):
                 st.session_state.mode = 'free_chat'
                 st.session_state.step = 'chat_interface'
                 st.rerun()
@@ -283,14 +255,14 @@ def show_mode_selection():
         if lang == 'fa':
             st.markdown("#### 📝 پیشنهاد شخصی‌سازی‌شده می‌خوام")
             st.markdown("چندتا سوال ازت می‌پرسم و بهترین گزینه رو پیدا می‌کنیم")
-            if st.button("📋 شروع سوالات", use_container_width=True):
+            if st.button("📋 شروع سوالات", use_container_width=True, key="mode_guided"):
                 st.session_state.mode = 'guided'
                 st.session_state.step = 'chat_interface'
                 st.rerun()
         else:
             st.markdown("#### 📝 I want personalized suggestions")
             st.markdown("I'll ask you a few questions to find the perfect choice")
-            if st.button("📋 Start Questions", use_container_width=True):
+            if st.button("📋 Start Questions", use_container_width=True, key="mode_guided"):
                 st.session_state.mode = 'guided'
                 st.session_state.step = 'chat_interface'
                 st.rerun()
@@ -299,21 +271,21 @@ def show_mode_selection():
         if lang == 'fa':
             st.markdown("#### ✅ می‌دونم چی می‌خوام")
             st.markdown("از منو انتخاب کن، من فقط چک می‌کنم مناسب باشه")
-            if st.button("📜 نمایش منو", use_container_width=True):
+            if st.button("📜 نمایش منو", use_container_width=True, key="mode_validation"):
                 st.session_state.mode = 'validation'
                 st.session_state.step = 'menu_display'
                 st.rerun()
         else:
             st.markdown("#### ✅ I know what I want")
             st.markdown("Choose from menu, I'll just check if it's suitable for you")
-            if st.button("📜 Show Menu", use_container_width=True):
+            if st.button("📜 Show Menu", use_container_width=True, key="mode_validation"):
                 st.session_state.mode = 'validation'
                 st.session_state.step = 'menu_display'
                 st.rerun()
     
     # Back button
     st.markdown("---")
-    if st.button("🔙 تغییر زبان | Change Language"):
+    if st.button("🔙 تغییر زبان | Change Language", key="back_lang"):
         st.session_state.step = 'language_selection'
         st.session_state.language = None
         st.rerun()
@@ -342,16 +314,17 @@ def show_menu_selection():
     for category, items in categories.items():
         st.markdown(f"### {category}")
         
-        cols = st.columns(2)
-        for idx, item in enumerate(items):
-            with cols[idx % 2]:
+        for item in items:
+            col1, col2 = st.columns([3, 1])
+            with col1:
                 st.markdown(f"**{item[f'name_{lang}']}**")
                 ingredients = ", ".join(item[f'ingredients_{lang}'][:3])
                 if len(item[f'ingredients_{lang}']) > 3:
                     ingredients += "..."
                 st.markdown(f"*{ingredients}*")
-                
-                if st.button(f"انتخاب | Select", key=f"select_{item['id']}"):
+            
+            with col2:
+                if st.button("انتخاب | Select", key=f"select_{item['id']}"):
                     st.session_state.selected_item = item['id']
                     st.session_state.step = 'chat_interface'
                     # Initialize validation conversation
@@ -363,10 +336,10 @@ def show_menu_selection():
                     
                     st.session_state.messages = [{"role": "user", "content": initial_message}]
                     st.rerun()
-                st.markdown("---")
+            st.markdown("---")
     
     # Back button
-    if st.button("🔙 بازگشت | Back"):
+    if st.button("🔙 بازگشت | Back", key="back_menu"):
         st.session_state.step = 'mode_selection'
         st.rerun()
 
@@ -394,7 +367,7 @@ def show_chat_interface():
     with col1:
         st.markdown(f"### {mode_names[lang][mode]}")
     with col2:
-        if st.button("🔄 شروع مجدد | Restart"):
+        if st.button("🔄 شروع مجدد | Restart", key="restart"):
             st.session_state.step = 'mode_selection'
             st.session_state.messages = []
             st.session_state.selected_item = None
@@ -407,25 +380,27 @@ def show_chat_interface():
     
     # Chat input
     if prompt := st.chat_input("پیام خود را بنویسید | Type your message"):
-        # Add user message
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.write(prompt)
-        
-        # Generate response
-        system_prompt = generate_system_prompt(lang, mode, menu_data)
-        response = chat_with_groq(st.session_state.messages, system_prompt)
-        
-        # Add assistant response
-        st.session_state.messages.append({"role": "assistant", "content": response})
-        with st.chat_message("assistant"):
-            st.write(response)
-        
-        st.rerun()
+        try:
+            # Add user message
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.write(prompt)
+            
+            # Generate response
+            system_prompt = generate_system_prompt(lang, mode, menu_data)
+            response = chat_with_groq(st.session_state.messages, system_prompt)
+            
+            # Add assistant response
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            with st.chat_message("assistant"):
+                st.write(response)
+            
+            st.rerun()
+        except Exception as e:
+            st.error(f"خطا در ارسال پیام | Error: {str(e)}")
     
     # Initial message for guided mode
     if mode == 'guided' and len(st.session_state.messages) == 0:
-        system_prompt = generate_system_prompt(lang, mode, menu_data)
         if lang == 'fa':
             initial_prompt = "سلام! بیا شروع کنیم. اول بگو آلرژی خاصی داری؟"
         else:
@@ -434,5 +409,40 @@ def show_chat_interface():
         st.session_state.messages.append({"role": "assistant", "content": initial_prompt})
         st.rerun()
 
+def main():
+    """Main application function"""
+    # Initialize session state
+    if 'step' not in st.session_state:
+        st.session_state.step = 'language_selection'
+    if 'language' not in st.session_state:
+        st.session_state.language = None
+    if 'mode' not in st.session_state:
+        st.session_state.mode = None
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
+    if 'selected_item' not in st.session_state:
+        st.session_state.selected_item = None
+    if 'menu_data' not in st.session_state:
+        st.session_state.menu_data = load_menu_data()
+
+    # Show appropriate step
+    try:
+        if st.session_state.step == 'language_selection':
+            show_language_selection()
+        elif st.session_state.step == 'mode_selection':
+            show_mode_selection()
+        elif st.session_state.step == 'menu_display':
+            show_menu_selection()
+        elif st.session_state.step == 'chat_interface':
+            show_chat_interface()
+    except Exception as e:
+        st.error(f"خطا در اجرای برنامه | Application Error: {str(e)}")
+        if st.button("🔄 شروع مجدد | Restart App"):
+            # Reset all session state
+            for key in list(st.session_state.keys()):
+                del st.session_state[key]
+            st.rerun()
+
+# Run the app
 if __name__ == "__main__":
     main()
