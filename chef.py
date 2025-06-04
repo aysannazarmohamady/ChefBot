@@ -227,7 +227,7 @@ def show_language_selection():
     st.markdown("""
     <div style='text-align: center; padding: 50px 0;'>
         <h1>🧑‍🍳 ChefBot</h1>
-        <h3>Your Smart Food Assistant | دستیار هوشمند شما برای خوردن</h3>
+        <h3>Your Smart Assistant for Cafe & Restaurant | دستیار هوشمند شما در کافه و رستوران</h3>
         <p style='font-size: 18px; color: #666;'>Choose your language to start | برای شروع زبان خود را انتخاب کنید</p>
     </div>
     """, unsafe_allow_html=True)
@@ -609,7 +609,7 @@ def show_footer():
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px;'>
-        <p>🧑‍🍳 <strong>ChefBot</strong> - Your Smart Food Assistant | دستیار هوشمند شما برای خوردن</p>
+        <p>🧑‍🍳 <strong>ChefBot</strong> - Your Smart Assistant for Cafe & Restaurant | دستیار هوشمند شما در کافه و رستوران</p>
         <p>Made with i-sun</p>
     </div>
     """, unsafe_allow_html=True)
