@@ -701,7 +701,7 @@ def show_footer():
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px;'>
         <p>🧑‍🍳 <strong></strong> - Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</p>
-        <p>Made with ❤️ using Streamlit & Groq AI</p>
+        <p>Made with Aysan</p>
     </div>
     """, unsafe_allow_html=True)
 
