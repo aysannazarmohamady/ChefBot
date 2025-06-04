@@ -318,7 +318,7 @@ def show_language_selection():
     st.markdown("""
     <div style='text-align: center; padding: 50px 0;'>
         <h1>🧑‍🍳 </h1>
-        <h3>Your Smart Culinary Assistant | دستیار هوشمند آشپزی شما</h3>
+        <h3>Your Smart Assistant for Cafe & Restaurant | دستیار هوشمند شما در کافه و رستوران</h3>
         <p style='font-size: 18px; color: #666;'>Choose your language to start | برای شروع زبان خود را انتخاب کنید</p>
     </div>
     """, unsafe_allow_html=True)
