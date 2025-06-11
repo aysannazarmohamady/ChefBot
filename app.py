@@ -14,7 +14,7 @@ def init_groq_client():
     """Initialize Groq client"""
     try:
         from groq import Groq
-        api_key = "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"
+        api_key = "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" 
         return Groq(api_key=api_key)
     except Exception as e:
         st.error(f"Error initializing Groq: {str(e)}")
